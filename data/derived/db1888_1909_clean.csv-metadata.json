@@ -1,0 +1,241 @@
+{
+ "@id": "https://iisg.amsterdam/db1888_1909_clean.csv",
+ "@context": [
+  "https://raw.githubusercontent.com/CLARIAH/COW/master/csvw.json",
+  {
+   "@language": "en",
+   "@base": "http://www.hkharderwijk.nl/"
+  },
+  {
+   "aat": "http://vocab.getty.edu/aat/",
+   "bibo": "http://purl.org/ontology/bibo/",
+   "bio": "http://purl.org/vocab/bio/0.1/",
+   "cidoc": "http://www.cidoc-crm.org/cidoc-crm/",
+   "csvw": "http://www.w3.org/ns/csvw#",
+   "dbo": "http://dbpedia.org/ontology/",
+   "dc": "http://purl.org/dc/terms/",
+   "dc11": "http://purl.org/dc/elements/1.1/",
+   "dcterms": "http://purl.org/dc/terms/",
+   "ecpo": "http://purl.org/ontology/ecpo#",
+   "foaf": "http://xmlns.com/foaf/0.1/",
+   "frbr": "http://purl.org/spar/frbr/core#",
+   "geo": "http://www.opengis.net/ont/geosparql#",
+   "geonames": "http://www.geonames.org/ontology#",
+   "gvp": "http://vocab.getty.edu/ontology#'",
+   "hkhv": "http://www.hkharderwijk.nl/vocab/",
+   "juso": "http://http://rdfs.co/juso/",
+   "lemon": "http://lemon-model.net/lemon#",
+   "midi": "http://purl.org/midi-ld/midi#",
+   "np": "http://www.nanopub.org/nschema#",
+   "owl": "http://www.w3.org/2002/07/owl#",
+   "periodo": "http://n2t.net/ark:/99152/p0v#",
+   "pnv": "https://www.lodewijkpetram.nl/vocab/pnv/doc/",
+   "prov": "http://www.w3.org/ns/prov#",
+   "qb": "http://purl.org/linked-data/cube#",
+   "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+   "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+   "schema": "https://schema.org/",
+   "sdmx-concept": "http://purl.org/linked-data/sdmx/2009/concept#",
+   "sdr": "https://iisg.amsterdam/",
+   "sdv": "https://iisg.amsterdam/vocab/",
+   "sem": "http://semanticweb.cs.vu.nl/2009/11/sem/",
+   "skos": "http://www.w3.org/2004/02/skos/core#",
+   "time": "http://www.w3.org/2006/time#",
+   "ulan": "http://vocab.getty.edu/ulan/",
+   "wgs84": "http://www.w3.org/2003/01/geo/wgs84_pos#",
+   "xml": "http://www.w3.org/XML/1998/namespace/",
+   "xsd": "http://www.w3.org/2001/XMLSchema#"
+  }
+ ],
+ "url": "db1888_1909_clean.csv",
+ "dialect": {
+  "delimiter": ",",
+  "encoding": "utf-8",
+  "quoteChar": "\""
+ },
+ "dc:title": "db1888_1909_clean.csv",
+ "dcat:keyword": [],
+ "dc:publisher": {
+  "schema:name": "CLARIAH Structured Data Hub - Datalegend",
+  "schema:url": {
+   "@id": "http://datalegend.net"
+  }
+ },
+ "dc:license": {
+  "@id": "http://opendefinition.org/licenses/cc-by/"
+ },
+ "dc:modified": {
+  "@value": "2021-03-25",
+  "@type": "xsd:date"
+ },
+ "tableSchema": {
+  "columns": [
+   {
+    "@id": "https://iisg.amsterdam/db1888_1909_clean.csv/column/regel",
+    "name": "regel",
+    "titles": [
+     "regel"
+    ],
+    "dc:description": "regel",
+    "datatype": "string",
+    "propertyUrl": "hkhv:lineNumberInSource"
+   },
+   {
+    "@id": "https://iisg.amsterdam/db1888_1909_clean.csv/column/datumInschrijving",
+    "name": "datumInschrijving",
+    "titles": [
+     "datumInschrijving"
+    ],
+    "dc:description": "datumInschrijving",
+    "datatype": "string",
+    "propertyUrl": "hkhv:dateOfRegistration"
+   },
+   {
+    "@id": "https://iisg.amsterdam/db1888_1909_clean.csv/column/familienaam",
+    "name": "familienaam",
+    "titles": [
+     "familienaam"
+    ],
+    "dc:description": "familienaam",
+    "datatype": "string",
+    "propertyUrl": "schema:familyName"
+   },
+   {
+    "@id": "https://iisg.amsterdam/db1888_1909_clean.csv/column/voornaam",
+    "name": "voornaam",
+    "titles": [
+     "voornaam"
+    ],
+    "dc:description": "voornaam",
+    "datatype": "string",
+    "propertyUrl": "schema:givenName"
+   },
+   {
+    "@id": "https://iisg.amsterdam/db1888_1909_clean.csv/column/geboorteDatum",
+    "name": "geboorteDatum",
+    "titles": [
+     "geboorteDatum"
+    ],
+    "dc:description": "geboorteDatum",
+    "datatype": "string",
+    "propertyUrl": "schema:birthDate"
+   },
+   {
+    "@id": "https://iisg.amsterdam/db1888_1909_clean.csv/column/geboortePlaats",
+    "name": "geboortePlaats",
+    "titles": [
+     "geboortePlaats"
+    ],
+    "dc:description": "geboortePlaats",
+    "datatype": "string",
+    "propertyUrl": "schema:birthPlace",
+    "valueUrl": "http://www.gemeentegeschiedenis.nl/gemeentenaam/{geboortePlaats}"
+   },
+   {
+    "@id": "https://iisg.amsterdam/db1888_1909_clean.csv/column/burgerlijkeStaat",
+    "name": "burgerlijkeStaat",
+    "titles": [
+     "burgerlijkeStaat"
+    ],
+    "dc:description": "burgerlijkeStaat",
+    "datatype": "string",
+    "propertyUrl": "hkhv:civilStatus"
+   },
+   {
+    "@id": "https://iisg.amsterdam/db1888_1909_clean.csv/column/religie",
+    "name": "religie",
+    "titles": [
+     "religie"
+    ],
+    "dc:description": "religie",
+    "datatype": "string",
+    "propertyUrl": "hkhv:religion"
+   },
+   {
+    "@id": "https://iisg.amsterdam/db1888_1909_clean.csv/column/beroep",
+    "name": "beroep",
+    "titles": [
+     "beroep"
+    ],
+    "dc:description": "beroep",
+    "datatype": "string",
+    "propertyUrl": "schema:hasOccupation",
+    "valueUrl": "https://iisg.amsterdam/resource/hsn/occupation/{beroep}"
+   },
+   {
+    "@id": "https://iisg.amsterdam/db1888_1909_clean.csv/column/verblijf",
+    "name": "verblijf",
+    "titles": [
+     "verblijf"
+    ],
+    "dc:description": "verblijf",
+    "datatype": "string",
+    "propertyUrl": "hkhv:staysAt"
+   },
+   {
+    "@id": "https://iisg.amsterdam/db1888_1909_clean.csv/column/aankomstDatum",
+    "name": "aankomstDatum",
+    "titles": [
+     "aankomstDatum"
+    ],
+    "dc:description": "aankomstDatum",
+    "datatype": "string",
+    "propertyUrl": "hkhv:dateOfArrival"
+   },
+   {
+    "@id": "https://iisg.amsterdam/db1888_1909_clean.csv/column/vorigeWoonplaats",
+    "name": "vorigeWoonplaats",
+    "titles": [
+     "vorigeWoonplaats"
+    ],
+    "dc:description": "vorigeWoonplaats",
+    "datatype": "string",
+    "propertyUrl": "hkhv:previousResidence",
+    "valueUrl": "http://www.gemeentegeschiedenis.nl/gemeentenaam/{vorigeWoonplaats}"
+   },
+   {
+    "@id": "https://iisg.amsterdam/db1888_1909_clean.csv/column/vertrekDatum",
+    "name": "vertrekDatum",
+    "titles": [
+     "vertrekDatum"
+    ],
+    "dc:description": "vertrekDatum",
+    "datatype": "string",
+    "propertyUrl": "hkhv:dateOfDeparture"
+   },
+   {
+    "@id": "https://iisg.amsterdam/db1888_1909_clean.csv/column/vertrekPlaats",
+    "name": "vertrekPlaats",
+    "titles": [
+     "vertrekPlaats"
+    ],
+    "dc:description": "vertrekPlaats",
+    "datatype": "string",
+    "propertyUrl": "hkhv:nextResidence",
+    "valueUrl": "http://www.gemeentegeschiedenis.nl/gemeentenaam/{vertrekPlaats}"
+   },
+   {
+    "@id": "https://iisg.amsterdam/db1888_1909_clean.csv/column/opmerkingen",
+    "name": "opmerkingen",
+    "titles": [
+     "opmerkingen"
+    ],
+    "dc:description": "opmerkingen",
+    "datatype": "string",
+    "propertyUrl": "schema:comment"
+   },
+   {
+    "@id": "https://iisg.amsterdam/db1888_1909_clean.csv/column/blad",
+    "name": "blad",
+    "titles": [
+     "blad"
+    ],
+    "dc:description": "blad",
+    "datatype": "string",
+    "propertyUrl": "hkhv:onPage"
+   }
+  ],
+  "primaryKey": "",
+  "aboutUrl": "nah-940/1888-1909/{regel}"
+ }
+}
