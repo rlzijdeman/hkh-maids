@@ -152,7 +152,7 @@ df['familienaamCl'] = df['familienaamCl'].str.replace(r'(?i)ph', 'f')
 df['familienaamCl'] = df['familienaamCl'].str.replace(r'(?i)ij', 'y')
 df['familienaamCl'] = df['familienaamCl'].replace('nan', '') # should be fixed in pandas 2.4
 
-df['voornaamCl'] = df['voornaam'].astype(str)
+df['voornaamCl'] = df['voornaam'].astype(str) # bug in pandas NaN is converted to nan
 df['voornaamCl'] = (df['voornaamCl'].str.lower()
                                     .str.strip() 
                                     .map(lambda x: unidecode.unidecode(x)) )
@@ -166,10 +166,34 @@ df['voornaamCl'] = df['voornaamCl'].str.replace(r'(?i)ij', 'y')
 df['voornaamCl'] = df['voornaamCl'].str.replace(r'(?i)nietsvermeld', '')
 df['voornaamCl'] = df['voornaamCl'].replace('nan', '') # should be fixed in pandas 2.4
 
+# create id for record
+df['registrationId'] = 'NAH940-DBRegister-1888-1909-' + df['regel'].astype(str)
+
+# check whether persons appear more than once
+# this is the case when lastname + firstname + birthdate match
+dfBak = df
+#df[['familienaamCl','voornaamCl','geboorteDatumCl']].value_counts()
 
 
 
-# df['sport'] = df.sport.str.replace(r'(^.*ball.*$)', 'ball sport')
+df['personId'] = df['regel']
 
-# write out as .csv file
-df.to_csv("../data/derived/db1888_1909_clean.csv")
+# dropping any rows with NaN or "" empty strings
+df = df.dropna(axis=0, subset=['geboorteDatumCl'])
+df = df[df.familienaamCl != '']
+df = df[df.voornaamCl != '']
+
+# dropping dubplicates based on given name, family name and birth date
+df = df.drop_duplicates(subset=['familienaamCl','voornaamCl','geboorteDatumCl'], keep = 'first')
+
+      
+# write out orignal data as .csv file
+dfBak.to_csv("../data/derived/db1888_1909_clean.csv", index = False)
+
+# write abridged .csv file for burgerLinker
+dfBurgerLinker = df[['registrationId', 'personId','geboorteDatumCl', 'familienaamCl','voornaamCl']]
+dfBurgerLinker.to_csv("../data/derived/db1888_1909_clean_unique.csv", index = False)
+
+
+
+

@@ -1,0 +1,144 @@
+{
+ "@id": "https://iisg.amsterdam/db1888_1909_clean_unique.csv",
+ "@context": [
+  "https://raw.githubusercontent.com/CLARIAH/COW/master/csvw.json",
+  {
+   "@language": "en",
+   "@base": "https://iisg.amsterdam/id/civ/"
+  },
+  {
+   "aat": "http://vocab.getty.edu/aat/",
+   "bibo": "http://purl.org/ontology/bibo/",
+   "bio": "http://purl.org/vocab/bio/0.1/",
+   "cidoc": "http://www.cidoc-crm.org/cidoc-crm/",
+   "csvw": "http://www.w3.org/ns/csvw#",
+   "dbo": "http://dbpedia.org/ontology/",
+   "dc": "http://purl.org/dc/terms/",
+   "dc11": "http://purl.org/dc/elements/1.1/",
+   "dcterms": "http://purl.org/dc/terms/",
+   "ecpo": "http://purl.org/ontology/ecpo#",
+   "foaf": "http://xmlns.com/foaf/0.1/",
+   "frbr": "http://purl.org/spar/frbr/core#",
+   "geo": "http://www.opengis.net/ont/geosparql#",
+   "geonames": "http://www.geonames.org/ontology#",
+   "gvp": "http://vocab.getty.edu/ontology#'",
+   "juso": "http://http://rdfs.co/juso/",
+   "lemon": "http://lemon-model.net/lemon#",
+   "midi": "http://purl.org/midi-ld/midi#",
+   "np": "http://www.nanopub.org/nschema#",
+   "owl": "http://www.w3.org/2002/07/owl#",
+   "periodo": "http://n2t.net/ark:/99152/p0v#",
+   "pnv": "https://www.lodewijkpetram.nl/vocab/pnv/doc/",
+   "prov": "http://www.w3.org/ns/prov#",
+   "qb": "http://purl.org/linked-data/cube#",
+   "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+   "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+   "schema": "http://schema.org/",
+   "sdmx-concept": "http://purl.org/linked-data/sdmx/2009/concept#",
+   "sdr": "https://iisg.amsterdam/",
+   "sdv": "https://iisg.amsterdam/vocab/",
+   "sem": "http://semanticweb.cs.vu.nl/2009/11/sem/",
+   "skos": "http://www.w3.org/2004/02/skos/core#",
+   "time": "http://www.w3.org/2006/time#",
+   "ulan": "http://vocab.getty.edu/ulan/",
+   "wgs84": "http://www.w3.org/2003/01/geo/wgs84_pos#",
+   "xml": "http://www.w3.org/XML/1998/namespace/",
+   "xsd": "http://www.w3.org/2001/XMLSchema#"
+  }
+ ],
+ "url": "db1888_1909_clean_unique.csv",
+ "dialect": {
+  "delimiter": ",",
+  "encoding": "ascii",
+  "quoteChar": "\""
+ },
+ "dc:title": "db1888_1909_clean_unique.csv",
+ "dcat:keyword": [],
+ "dc:publisher": {
+  "schema:name": "CLARIAH Structured Data Hub - Datalegend",
+  "schema:url": {
+   "@id": "http://datalegend.net"
+  }
+ },
+ "dc:license": {
+  "@id": "http://opendefinition.org/licenses/cc-by/"
+ },
+ "dc:modified": {
+  "@value": "2021-07-17",
+  "@type": "xsd:date"
+ },
+ "tableSchema": {
+  "columns": [
+   {
+    "virtual": true,
+    "propertyUrl": "rdf:type",
+    "valueUrl": "schema:Person"
+   },
+   {
+    "@id": "https://iisg.amsterdam/db1888_1909_clean_unique.csv/column/personId",
+    "name": "personId",
+    "titles": [
+     "personId"
+    ],
+    "dc:description": "personId",
+    "datatype": "string"
+   },
+   {
+    "@id": "https://iisg.amsterdam/db1888_1909_clean_unique.csv/column/registrationId",
+    "name": "registrationId",
+    "titles": [
+     "registrationId"
+    ],
+    "dc:description": "registrationId",
+    "datatype": "string"
+   },
+   {
+    "@id": "https://iisg.amsterdam/db1888_1909_clean_unique.csv/column/familienaamCl",
+    "name": "familienaamCl",
+    "titles": [
+     "familienaamCl"
+    ],
+    "dc:description": "familienaamCl",
+    "datatype": "string"
+   },
+   {
+    "@id": "https://iisg.amsterdam/db1888_1909_clean_unique.csv/column/voornaamCl",
+    "name": "voornaamCl",
+    "titles": [
+     "voornaamCl"
+    ],
+    "dc:description": "voornaamCl",
+    "datatype": "string"
+   },
+   {
+    "@id": "https://iisg.amsterdam/db1888_1909_clean_unique.csv/column/geboorteDatumCl",
+    "name": "geboorteDatumCl",
+    "titles": [
+     "geboorteDatumCl"
+    ],
+    "dc:description": "geboorteDatumCl",
+    "datatype": "xsd:date"
+   },
+   {
+    "@id": "https://iisg.amsterdam/db1888_1909_clean_unique.csv/column/registrationType",
+    "name": "registrationType",
+    "titles": [
+     "registrationType"
+    ],
+    "dc:description": "registrationType",
+    "datatype": "string"
+   },
+   {
+    "@id": "https://iisg.amsterdam/db1888_1909_clean_unique.csv/column/role",
+    "name": "role",
+    "titles": [
+     "role"
+    ],
+    "dc:description": "role",
+    "datatype": "string"
+   }
+  ],
+  "primaryKey": "personId",
+  "aboutUrl": "person/b-{personId}"
+ }
+}
