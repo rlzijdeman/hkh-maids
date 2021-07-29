@@ -11,6 +11,7 @@
    "bibo": "http://purl.org/ontology/bibo/",
    "bio": "http://purl.org/vocab/bio/0.1/",
    "cidoc": "http://www.cidoc-crm.org/cidoc-crm/",
+   "civ": "https://iisg.amsterdam/id/civ/",
    "csvw": "http://www.w3.org/ns/csvw#",
    "dbo": "http://dbpedia.org/ontology/",
    "dc": "http://purl.org/dc/terms/",
@@ -25,6 +26,7 @@
    "juso": "http://http://rdfs.co/juso/",
    "lemon": "http://lemon-model.net/lemon#",
    "midi": "http://purl.org/midi-ld/midi#",
+   "mydata": "http://hkharderwijk.nl/dataset/inv940/",
    "np": "http://www.nanopub.org/nschema#",
    "owl": "http://www.w3.org/2002/07/owl#",
    "periodo": "http://n2t.net/ark:/99152/p0v#",
@@ -64,7 +66,7 @@
   "@id": "http://opendefinition.org/licenses/cc-by/"
  },
  "dc:modified": {
-  "@value": "2021-07-17",
+  "@value": "2021-07-29",
   "@type": "xsd:date"
  },
  "tableSchema": {
@@ -72,16 +74,7 @@
    {
     "virtual": true,
     "propertyUrl": "rdf:type",
-    "valueUrl": "schema:Person"
-   },
-   {
-    "@id": "https://iisg.amsterdam/db1888_1909_clean_unique.csv/column/personId",
-    "name": "personId",
-    "titles": [
-     "personId"
-    ],
-    "dc:description": "personId",
-    "datatype": "string"
+    "valueUrl": "civ:Birth"
    },
    {
     "@id": "https://iisg.amsterdam/db1888_1909_clean_unique.csv/column/registrationId",
@@ -90,7 +83,40 @@
      "registrationId"
     ],
     "dc:description": "registrationId",
-    "datatype": "string"
+    "datatype": "string",
+    "propertyUrl": "civ:registrationID"
+   },
+   {
+    "@id": "https://iisg.amsterdam/db1888_1909_clean_unique.csv/column/personId",
+    "name": "personId",
+    "titles": [
+     "personId"
+    ],
+    "dc:description": "personId",
+    "aboutUrl": "mydata:{personId}",
+    "propertyUrl": "civ:personID"
+    },
+   {
+    "@id": "https://iisg.amsterdam/db1888_1909_clean_unique.csv/column/geboorteDatumCl",
+    "name": "geboorteDatumCl",
+    "titles": [
+     "geboorteDatumCl"
+    ],
+    "dc:description": "geboorteDatumCl",
+    "datatype": "xsd:date",
+    "propertyUrl": "civ:eventDate"
+   },
+   {
+    "virtual": true,
+    "aboutUrl": "mydata:{personId}",
+    "propertyUrl": "rdf:type",
+    "valueUrl": "schema:Person"
+   },
+   {
+    "virtual": true,
+    "aboutUrl": "mydata:{registrationId}",
+    "propertyUrl": "civ:newborn",
+    "valueUrl": "mydata:{personId}"
    },
    {
     "@id": "https://iisg.amsterdam/db1888_1909_clean_unique.csv/column/familienaamCl",
@@ -99,7 +125,9 @@
      "familienaamCl"
     ],
     "dc:description": "familienaamCl",
-    "datatype": "string"
+    "datatype": "string",
+    "aboutUrl": "mydata:{personId}",
+    "propertyUrl": "schema:familyName"
    },
    {
     "@id": "https://iisg.amsterdam/db1888_1909_clean_unique.csv/column/voornaamCl",
@@ -108,37 +136,12 @@
      "voornaamCl"
     ],
     "dc:description": "voornaamCl",
-    "datatype": "string"
-   },
-   {
-    "@id": "https://iisg.amsterdam/db1888_1909_clean_unique.csv/column/geboorteDatumCl",
-    "name": "geboorteDatumCl",
-    "titles": [
-     "geboorteDatumCl"
-    ],
-    "dc:description": "geboorteDatumCl",
-    "datatype": "xsd:date"
-   },
-   {
-    "@id": "https://iisg.amsterdam/db1888_1909_clean_unique.csv/column/registrationType",
-    "name": "registrationType",
-    "titles": [
-     "registrationType"
-    ],
-    "dc:description": "registrationType",
-    "datatype": "string"
-   },
-   {
-    "@id": "https://iisg.amsterdam/db1888_1909_clean_unique.csv/column/role",
-    "name": "role",
-    "titles": [
-     "role"
-    ],
-    "dc:description": "role",
-    "datatype": "string"
+    "datatype": "string",
+    "aboutUrl": "mydata:{personId}",
+    "propertyUrl": "schema:givenName"
    }
   ],
-  "primaryKey": "personId",
-  "aboutUrl": "person/b-{personId}"
+  "primaryKey": "registrationId",
+  "aboutUrl": "mydata:{registrationId}"
  }
 }
