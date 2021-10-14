@@ -1,4 +1,4 @@
-registrationId,personId,geboorteDatumCl,familyName,givenName,birthPlace
+registrationId,personId,birthDate,familyName,givenName,birthPlace
 NAH940-DBRegister-1888-1909-2,2,1864-11-10,apperlo,elisabeth,Zwartsluis
 NAH940-DBRegister-1888-1909-5,5,1868-05-24,appelboom,jannetje,Ermelo
 NAH940-DBRegister-1888-1909-8,8,1864-09-21,aartsen,johannaeverdina,Harderwijk

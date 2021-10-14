@@ -196,7 +196,7 @@ dfBurgerLinker.to_csv("../data/derived/db1888_1909_clean_unique.csv", index = Fa
 
 # write abridged .csv file for NRCM workshop (with new var names and adding birth place variable)
 dfNRCM = df[['registrationId', 'personId','geboorteDatumCl','familienaamCl','voornaamCl', 'geboortePlaats']]
-dfNRCM = dfNRCM.rename(columns={'geboorteDatumCL': 'birthDate', 'familienaamCl': 'familyName', 
+dfNRCM = dfNRCM.rename(columns={'geboorteDatumCl': 'birthDate', 'familienaamCl': 'familyName', 
        'voornaamCl': 'givenName', 'geboortePlaats': 'birthPlace'})
 
 dfNRCM.to_csv("../data/derived/db1888_1909_clean_unique_NCRM.csv", index = False)
