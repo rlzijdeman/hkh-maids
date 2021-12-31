@@ -47,8 +47,12 @@ df['aankomstDatumCl'] = df['aankomstDatumCl'].replace('26-07--1895', '26-07-1895
 df['aankomstDatumCl'] = df['aankomstDatumCl'].replace('05-05-190?', '05-05-1900') # based on regisration year
 
 # later on in sparql also found some centenial errors
-df['aankomstDatumCl'] = df['aankomstDatumCl'].replace('1982-11-10', '1892-11-10')
-df['aankomstDatumCl'] = df['aankomstDatumCl'].replace('1984-02-26', '1894-02-26')
+df['aankomstDatumCl'] = df['aankomstDatumCl'].replace('10-11-1982', '10-11-1892')
+df['aankomstDatumCl'] = df['aankomstDatumCl'].replace('26-02-1984', '26-02-1894')
+df['aankomstDatumCl'] = df['aankomstDatumCl'].replace('28-02-1807', '28-02-1887') # year based on order
+df['aankomstDatumCl'] = df['aankomstDatumCl'].replace('13-05-1807', '13-05-1887') # year based on order
+
+
        
 
 y = df['aankomstDatum'][~df['aankomstDatumCl'].str.contains('^[0-9][0-9]-[0-9][0-9]-1[8-9][0-9][0-9]$')]
