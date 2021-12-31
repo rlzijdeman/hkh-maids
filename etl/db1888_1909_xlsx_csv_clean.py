@@ -49,7 +49,7 @@ df['aankomstDatumCl'] = df['aankomstDatumCl'].replace('05-05-190?', '05-05-1900'
 # later on in sparql also found some centenial errors
 df['aankomstDatumCl'] = df['aankomstDatumCl'].replace('1982-11-10', '1892-11-10')
 df['aankomstDatumCl'] = df['aankomstDatumCl'].replace('1984-02-26', '1894-02-26')
-
+       
 
 y = df['aankomstDatum'][~df['aankomstDatumCl'].str.contains('^[0-9][0-9]-[0-9][0-9]-1[8-9][0-9][0-9]$')]
 print(y.dropna())
@@ -149,6 +149,11 @@ df['vertrekDatumCl'] = df['vertrekDatumCl'].replace('0608-1906', '06-08-1906')
 df['vertrekDatumCl'] = df['vertrekDatumCl'].replace('17-10--1903', '17-10-1903')
 df['vertrekDatumCl'] = df['vertrekDatumCl'].replace('01-7-1897', '01-07-1897')
 df['vertrekDatumCl'] = df['vertrekDatumCl'].replace('01-081904', '01-08-1904')
+
+# later on in SPARQL also found error in entry 611
+df['vertrekDatumCl'] = df['vertrekDatumCl'].replace('26-05-1994', '26-05-xxxx') # could be 1904 or 1894
+
+
 
 # when converting to date, I also found this illegal date. removing it.
 df['vertrekDatumCl'] = df['vertrekDatumCl'].replace('29-02-1902', 'xx-xx-1902')
