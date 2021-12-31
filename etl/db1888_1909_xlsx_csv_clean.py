@@ -12,7 +12,150 @@ df.columns = ['regel', 'datumInschrijving', 'familienaam', 'voornaam', 'geboorte
        'vorigeWoonplaats', 'vertrekDatum', 'vertrekPlaats', 'opmerkingen', 'blad']
 
 
-#print(df)
+################################ date of arrival ##############################
+
+df['aankomstDatumCl'] = df['aankomstDatum'].astype(str)
+#### show all dates that do not match 2digits-2digits-4digits
+x = df['aankomstDatum'][~df['aankomstDatumCl'].str.contains('^[0-9][0-9]-[0-9][0-9]-1[8-9][0-9][0-9]$')]
+# print(x.dropna())
+
+# output of wrong values
+# 72           30-05-1885
+# 335     19-02-1894 Eelde
+# 373           15-02-????
+# 698          05-08-1904
+# 865          05-05-18893
+# 935            2-09-1902
+# 946          06-101-1903
+# 951            20-7-1904
+# 1406       deel K bl.165
+# 1407          deel A 207
+# 532         24--04-1902
+# 1634                   -
+# 1662         26-07--1895
+# 1853          05-05-190?
+
+# pickup trailing spaces
+df['aankomstDatumCl'] = df['aankomstDatumCl'].str.strip()
+
+df['aankomstDatumCl'] = df['aankomstDatumCl'].replace('19-02-1894 Eelde', '19-02-1894')
+df['aankomstDatumCl'] = df['aankomstDatumCl'].replace('2-09-1902', '02-09-1902')
+df['aankomstDatumCl'] = df['aankomstDatumCl'].replace('06-101-1903', '06-11-1903') # 06-101-1903 can't be 06-11 because entry is in October
+df['aankomstDatumCl'] = df['aankomstDatumCl'].replace('20-7-1904', '20-07-1904')
+df['aankomstDatumCl'] = df['aankomstDatumCl'].replace('24--04-1902', '24-04-1902')
+df['aankomstDatumCl'] = df['aankomstDatumCl'].replace('26-07--1895', '26-07-1895')
+df['aankomstDatumCl'] = df['aankomstDatumCl'].replace('05-05-190?', '05-05-1900') # based on regisration year
+
+y = df['aankomstDatum'][~df['aankomstDatumCl'].str.contains('^[0-9][0-9]-[0-9][0-9]-1[8-9][0-9][0-9]$')]
+print(y.dropna())
+# 373        15-02-????
+# 865       05-05-18893
+# 1406    deel K bl.165
+# 1407       deel A 207
+# 1634                -
+
+# ok let's kill the remaing values
+#### so now only preserve values of the pattern 2digits-2digits-4digits
+df['aankomstDatumCl'] = df['aankomstDatumCl'][df['aankomstDatumCl'].str.contains('^[0-9][0-9]-[0-9][0-9]-1[8-9][0-9][0-9]$')]
+
+
+# now final step for dates: invert DD-MM-YYYY to YYYY-MM-DD
+df['aankomstDatumCl'] = pd.to_datetime(df['aankomstDatumCl'], format='%d-%m-%Y').dt.strftime('%Y-%m-%d')
+
+print(df['aankomstDatumCl'])
+################################ date of registration ##############################
+
+df['datumInschrijvingCl'] = df['datumInschrijving'].astype(str)
+#### show all dates that do not match 2digits-2digits-4digits
+x = df['datumInschrijving'][~df['datumInschrijvingCl'].str.contains('^[0-9][0-9]-[0-9][0-9]-1[8-9][0-9][0-9]$')]
+print(x.dropna())
+# 57      02-12-????
+# 139
+# 362     19-06-????
+# 455       11-11-??
+# 540     02-06-????
+# 655             de
+# 973     onleesbaar
+# 1195    15-08-19??
+# 1368      25-02-??
+
+
+# pickup trailing spaces
+df['datumInschrijvingCl'] = df['datumInschrijvingCl'].str.strip()
+df['datumInschrijvingCl'] = df['datumInschrijvingCl'].replace('02-12-????', '02-12-1904') #based on aankomstdatum: 01-12-1904
+df['datumInschrijvingCl'] = df['datumInschrijvingCl'].replace('11-11-??', '11-11-1904') #based on aankomstdatum: 09-11-1904
+df['datumInschrijvingCl'] = df['datumInschrijvingCl'].replace('15-08-19??', '15-08-1904') #based on aankomstdatum: 21-07-1904
+
+y = df['datumInschrijving'][~df['datumInschrijvingCl'].str.contains('^[0-9][0-9]-[0-9][0-9]-1[8-9][0-9][0-9]$')]
+print(y.dropna())
+# 139
+# 362     19-06-????
+# 540     02-06-????
+# 655             de
+# 973     onleesbaar
+# 1368      25-02-??
+
+# ok let's kill the remaing values
+#### so now only preserve values of the pattern 2digits-2digits-4digits
+df['datumInschrijvingCl'] = df['datumInschrijvingCl'][df['datumInschrijvingCl'].str.contains('^[0-9][0-9]-[0-9][0-9]-1[8-9][0-9][0-9]$')]
+
+# also kill other non xsd-date compliant values... 
+df['datumInschrijvingCl'] = df['datumInschrijvingCl'].replace('00-00-1900', np.NaN)
+df['datumInschrijvingCl'] = df['datumInschrijvingCl'].replace('00-01-1900', np.NaN)
+df['datumInschrijvingCl'] = df['datumInschrijvingCl'].replace('00-02-1900', np.NaN)
+df['datumInschrijvingCl'] = df['datumInschrijvingCl'].replace('00-04-1900', np.NaN)
+df['datumInschrijvingCl'] = df['datumInschrijvingCl'].replace('00-05-1900', np.NaN)
+df['datumInschrijvingCl'] = df['datumInschrijvingCl'].replace('00-06-1900', np.NaN)
+df['datumInschrijvingCl'] = df['datumInschrijvingCl'].replace('00-09-1900', np.NaN)
+df['datumInschrijvingCl'] = df['datumInschrijvingCl'].replace('00-01-1899', np.NaN)
+
+
+# now final step for dates: invert DD-MM-YYYY to YYYY-MM-DD
+df['datumInschrijvingCl'] = pd.to_datetime(df['datumInschrijvingCl'], format='%d-%m-%Y').dt.strftime('%Y-%m-%d')
+
+
+################################ date of departure ##############################
+
+df['vertrekDatumCl'] = df['vertrekDatum'].astype(str)
+
+# pickup trailing spaces
+df['vertrekDatumCl'] = df['vertrekDatumCl'].str.strip()
+
+
+#### show all dates that do not match 2digits-2digits-4digits
+x = df['vertrekDatum'][~df['vertrekDatumCl'].str.contains('^[0-9][0-9]-[0-9][0-9]-1[8-9][0-9][0-9]$')]
+print(x.dropna())
+
+# 254        31-01-??
+# 527      09-03-19??
+# 610       07-081891
+# 1077    110-04-1889
+# 1324    2/6-07-1906
+# 1487              -
+# 1535      0608-1906
+# 1582    17-10--1903
+# 1631              -
+# 1666      01-7-1897
+# 1804      01-081904
+# 1879       17-02-??
+
+df['vertrekDatumCl'] = df['vertrekDatumCl'].replace('07-081891', '07-08-1891')
+df['vertrekDatumCl'] = df['vertrekDatumCl'].replace('0608-1906', '06-08-1906')
+df['vertrekDatumCl'] = df['vertrekDatumCl'].replace('17-10--1903', '17-10-1903')
+df['vertrekDatumCl'] = df['vertrekDatumCl'].replace('01-7-1897', '01-07-1897')
+df['vertrekDatumCl'] = df['vertrekDatumCl'].replace('01-081904', '01-08-1904')
+
+# when converting to date, I also found this illegal date. removing it.
+df['vertrekDatumCl'] = df['vertrekDatumCl'].replace('29-02-1902', 'xx-xx-1902')
+
+
+# ok let's kill the remaing values
+#### so now only preserve values of the pattern 2digits-2digits-4digits
+df['vertrekDatumCl'] = df['vertrekDatumCl'][df['vertrekDatumCl'].str.contains('^[0-9][0-9]-[0-9][0-9]-1[8-9][0-9][0-9]$')]
+
+# now final step for dates: invert DD-MM-YYYY to YYYY-MM-DD
+df['vertrekDatumCl'] = pd.to_datetime(df['vertrekDatumCl'], format='%d-%m-%Y', errors='coerce').dt.strftime('%Y-%m-%d')
+
 
 # now go through burgerLinker data cleaning steps
 # https://github.com/CLARIAH/burgerLinker/wiki/01.-Data-standardization
