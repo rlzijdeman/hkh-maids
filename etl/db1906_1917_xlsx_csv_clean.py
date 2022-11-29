@@ -267,11 +267,12 @@ df['familienaamCl'] = df['familienaamCl'].str.split(' ').str[0]
 
 # df['familienaamCl'] = (df['familienaamCl'].str.lower().str.strip().map(lambda x: unidecode.unidecode(x)) )
 df['familienaamCl'] = (df['familienaamCl'].str.lower().str.strip() )
-df['familienaamCl'] = unidecode.unidecode(df['familienaamCl'])
-pd.set_option('display.max_rows', None)
+
+
+#df['familienaamCl'] = unidecode.unidecode(df['familienaamCl'])
+# pd.set_option('display.max_rows', None)
 
 print(df['familienaamCl'])
-xx
 
 # From output below: FutureWarning: The default value of regex will change from True to False in a future version.
 df['familienaamCl'] = df['familienaamCl'].str.replace(r' ', '')
@@ -283,7 +284,46 @@ df['familienaamCl'] = df['familienaamCl'].str.replace(r'(?i)ph', 'f')
 df['familienaamCl'] = df['familienaamCl'].str.replace(r'(?i)ij', 'y')
 
 print(df['familienaamCl'].dropna())
-xx
+
+df['familienaamCl'] = df['familienaamCl'].replace('nan', '') # should be fixed in pandas 2.4
+
+df['voornaamCl'] = df['voornaam'].astype(str) # bug in pandas NaN is converted to nan
+#df['voornaamCl'] = (df['voornaamCl'].str.lower()
+#                                    .str.strip() 
+#                                    .map(lambda x: unidecode.unidecode(x)) )
+df['voornaamCl'] = df['voornaamCl'].str.replace(r' ', '')
+df['voornaamCl'] = df['voornaamCl'].str.replace(r'\.', '')
+df['voornaamCl'] = df['voornaamCl'].str.replace(r'(?i)ch', 'g')
+df['voornaamCl'] = df['voornaamCl'].str.replace(r'([Cc])', 'k')
+df['voornaamCl'] = df['voornaamCl'].str.replace(r'([Zz])', 's')
+df['voornaamCl'] = df['voornaamCl'].str.replace(r'(?i)ph', 'f')
+df['voornaamCl'] = df['voornaamCl'].str.replace(r'(?i)ij', 'y')
+df['voornaamCl'] = df['voornaamCl'].str.replace(r'(?i)nietsvermeld', '')
+df['voornaamCl'] = df['voornaamCl'].replace('nan', '') # should be fixed in pandas 2.4
+
+# create id for record
+df['registrationId'] = 'NAH940-DBRegister-1906-1917-' + df['regel'].astype(str)
+
+# check whether persons appear more than once
+# this is the case when lastname + firstname + birthdate match
+dfBak = df
+#df[['familienaamCl','voornaamCl','geboorteDatumCl']].value_counts()
+
+
+
+df['personId'] = df['regel']
+
+# dropping any rows with NaN or "" empty strings
+df = df.dropna(axis=0, subset=['geboorteDatumCl'])
+df = df[df.familienaamCl != '']
+df = df[df.voornaamCl != '']
+
+# dropping dubplicates based on given name, family name and birth date
+df = df.drop_duplicates(subset=['familienaamCl','voornaamCl','geboorteDatumCl'], keep = 'first')
+
+      
+# write out orignal data as .csv file
+dfBak.to_csv("../data/derived/db1906_1917_clean_unique.csv", index = False)
 
 
 
