@@ -325,6 +325,6 @@ df = df.drop_duplicates(subset=['familienaamCl','voornaamCl','geboorteDatumCl'],
 # write out orignal data as .csv file
 dfBak.to_csv("../data/derived/db1906_1917_clean_unique.csv", index = False)
 
-
+       
 
 
